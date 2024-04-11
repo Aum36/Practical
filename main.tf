@@ -16,7 +16,7 @@ resource "aws_instance" "web" {
     ami           = "ami-007020fd9c84e18c7"
     instance_type = "t2.micro"
     security_groups = ["launch-wizard-1"]
-    user_data     = "${file("./install.sh")}"
+    user_data     = file("${path.module}/install.sh")
 
     root_block_device {
         volume_size = 4  // 4GB volume size
