@@ -7,10 +7,7 @@ terraform {
   }
 }
 
-provider "aws" {
-    profile = "default"
-    region = "ap-south-1"
-}
+provider "aws" {}
 
 resource "aws_instance" "web" {
     ami           = "ami-007020fd9c84e18c7"
