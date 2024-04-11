@@ -1,21 +1,29 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
 provider "aws" {
     profile = "default"
     region = "ap-south-1"
 }
 
-data "aws_security_group" "selected" {
-  id ="sg-04d9b435d25373bd4"
-}
-
-
 resource "aws_instance" "web" {
-  ami           = "ami-007020fd9c84e18c7"
-  instance_type = "t2.micro"
+    ami           = "ami-007020fd9c84e18c7"
+    instance_type = "t2.micro"
+    security_groups = ["launch-wizard-1"]
+    user_data     = "${file("install.sh")}"
 
-  tags = {
-    Name = "HelloWorldTerraform"
+    root_block_device {
+        volume_size = 4  // 4GB volume size
+        volume_type = "gp2"  // General Purpose SSD (gp2) volume type
+    }
+    tags = {
+    Name = "Practical Exam Server"
   }
-  
-  user_data = file("intall.sh")
 }
 
