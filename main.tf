@@ -16,7 +16,7 @@ resource "aws_instance" "web" {
     user_data     = file("${path.module}/install.sh")
 
     root_block_device {
-        volume_size = 4  // 4GB volume size
+        volume_size = 8  // 4GB volume size
         volume_type = "gp2"  // General Purpose SSD (gp2) volume type
     }
     tags = {
